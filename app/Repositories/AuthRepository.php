@@ -24,4 +24,15 @@ class AuthRepository
             throw $exception;
         }
     }
+
+    public function logout($request)
+    {
+        try {
+            return $request->user()->tokens()->delete();
+        } catch (\Exception $exception) {
+            Log::error($exception->getMessage());
+
+            throw $exception;
+        }
+    }
 }

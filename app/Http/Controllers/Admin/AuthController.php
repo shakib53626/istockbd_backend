@@ -6,6 +6,7 @@ use App\Classes\BaseController;
 use App\Http\Requests\Admin\Auth\LoginRequest;
 use App\Models\User;
 use App\Repositories\AuthRepository;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 
@@ -39,6 +40,19 @@ class AuthController extends BaseController
         } catch (\Exception $exception) {
 
             Log::error($exception->getMessage());
+            return $this->sendError(__("common.commonError"));
+        }
+    }
+
+    public function logout(Request $request)
+    {
+        try {
+            $this->repository->logout($request);
+
+            return $this->sendResponse(null, "User logout successfully");
+        } catch (\Exception $exception) {
+            Log::error($exception->getMessage());
+
             return $this->sendError(__("common.commonError"));
         }
     }
