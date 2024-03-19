@@ -21,5 +21,6 @@ class UserSeeder extends Seeder
             "password"     => Hash::make(123456789)
         ]);
 
+        $user->roles()->attach(1);
     }
 }
