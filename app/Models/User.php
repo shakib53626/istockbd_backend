@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Laratrust\Traits\HasRolesAndPermissions;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\File;
 use Laratrust\Contracts\LaratrustUser;
 use Laravel\Sanctum\HasApiTokens;
 
@@ -40,4 +41,18 @@ class User extends Authenticatable implements LaratrustUser
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public $path = "images/users";
+
+    public function getImageAttribute($value)
+    {
+        if ($value) {
+            if (File::exists(public_path("{$this->path}/{$value}"))) {
+
+                return asset($this->path . '/' . $value);
+            }
+        }
+
+        return asset('images/default.png');
+    }
 }

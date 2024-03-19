@@ -24,4 +24,25 @@ class BaseHelper
 
         return response()->json($response, $code);
     }
+
+    public static function checkPaginateSize($paginate = null)
+    {
+        $maxPaginate     = config('crud.paginate.max');
+        $defaultPaginate = config('crud.paginate.default');
+        $paginate        = $paginate ?? $defaultPaginate;
+        $paginate        = $paginate > $maxPaginate ? $maxPaginate : $paginate;
+
+        return $paginate;
+    }
+
+    public static function getOldPath($path, $imageName)
+    {
+        // Use pathinfo to extract the filename
+        $pathInfo = pathinfo($imageName);
+
+        // Get the filename from pathinfo
+        $filename = $pathInfo["basename"];
+
+        return public_path($path . "/" . $filename);
+    }
 }
