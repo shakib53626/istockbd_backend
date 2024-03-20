@@ -42,7 +42,6 @@ class UserController extends BaseController
 
     public function store(StoreUserRequest $request)
     {
-        info($request->all());
         if (!$request->user()->hasPermission('users-create')) {
             return $this->sendError(__("common.unauthorized"));
         }
@@ -117,5 +116,12 @@ class UserController extends BaseController
 
             return $this->sendError(__("common.commonError"));
         }
+    }
+
+    public function destroy(Request $request)
+    {
+        $category = User::where('id', $request->id)->delete();
+
+        return $this->sendResponse($category, 'User Deleted successfully');
     }
 }

@@ -95,7 +95,7 @@ class UserRepository
         $email       = $request->input('email', null);
         $phoneNumber = $request->input('phone_number', null);
         $password    = $request->input('password', null);
-        $status      = $request->input('status', 1);
+        $status      = $request->input('status', 'inactive');
         $roleIds     = $request->input('role_ids', []);
 
         try {

@@ -29,6 +29,7 @@ Route::middleware("auth:sanctum")->group(function() {
         Route::get('users/permission', 'userPermission');
         Route::get('users/{id}', 'show');
         Route::put('users/{id}', 'update');
+        Route::delete('users/{id}', 'destroy');
     });
 
     Route::controller(RoleController::class)->group(function(){
