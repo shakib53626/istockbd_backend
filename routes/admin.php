@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\RoleController;
+use App\Http\Controllers\Admin\StatusController;
 use App\Http\Controllers\Admin\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -37,6 +38,13 @@ Route::middleware("auth:sanctum")->group(function() {
         Route::post('roles',  'store');
         Route::get('roles/{id}', 'show');
         Route::put('roles/{id}', 'update');
+    });
+
+    Route::controller(StatusController::class)->group(function(){
+        Route::get('statuses', 'index');
+        Route::post('statuses', 'store');
+        Route::get('statuses/{id}', 'show');
+        Route::put('statuses/{id}', 'update');
     });
 
 });
